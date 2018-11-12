@@ -1,24 +1,45 @@
 "use strict";
 
-let url = "https://images-api.nasa.gov/search?q=";
+let ApiUrl = "https://images-api.nasa.gov/search?q=";
 let btn = document.getElementById('search-btn');
 let messages = document.getElementById("msg");
 let dataWrap = document.getElementById('results');
+let nextBtn = document.getElementsByClassName('next')[0];
+let prevBtn = document.getElementsByClassName('prev')[0];
+let nextUrl = "";
+let prevUrl = "";
 
 //Calls getData on button click with user search or default value
 btn.addEventListener('click', (e) => {
   let query = document.getElementById("query").value;
+  if(query === "") query = "star";
   document.getElementById("query").value = "";
   btn.innerText = "searching...";
   dataWrap.innerHTML = "";
-  query === "" ? getData('stars') : getData(query);
+  query === "" ? getData('stars') : getData(ApiUrl + query);
+});
+
+//Listeners for previous and next button
+nextBtn.addEventListener('click', (e) =>{
+  btn.innerText = "searching...";
+  dataWrap.innerHTML = "";
+  getData(nextUrl);
+});
+prevBtn.addEventListener('click', (e) =>{
+  btn.innerText = "searching...";
+  dataWrap.innerHTML = "";
+  getData(prevUrl);
 });
 
 //gets data from NASA API.
-function getData(val){
+function getData(url){
   messages.innerText = "";
+  prevUrl = "";
+  nextUrl = "";
+  prevBtn.style.display = "none";
+  nextBtn.style.display = "none";
 
-  fetch(url + val)
+  fetch(url)
     .then(res =>{
       return res.status === 200 ? res.json() : res.status === 400 ? "400Error" : "500Error";
     })
@@ -37,6 +58,7 @@ function getData(val){
 // Displays the fetched data to user if any
 function displayData(JsonData){
   let data = JsonData.collection.items;
+  let links = JsonData.collection.links;
   let results = "";
 
   data.forEach(x =>{
@@ -55,6 +77,21 @@ function displayData(JsonData){
     messages.innerText = "Sorry! The are no results for this search.";
   } else {
     dataWrap.innerHTML = results;
+    displayNavigation(links);
   }
   btn.innerText = "search";
+}
+
+function displayNavigation(links){
+  if(links && links.length > 0){
+    links.forEach(x =>{
+      if(x.rel === "prev"){
+        prevUrl = x.href;
+        prevBtn.style.display = "inline-block";
+      } else {
+        nextUrl = x.href;
+        nextBtn.style.display = "inline-block";
+      }
+    });
+  }
 }

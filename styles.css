@@ -2,6 +2,22 @@ body{
   background: #ddd;
 }
 
+button{
+  padding: 8px;
+  width: 184px;
+  border: 3px solid #21526f;
+  margin: 10px 0;
+  color: #fff;
+  background: #21526f;
+  transition: all .25s linear;
+}
+
+button:hover{
+  background: #fff;
+  color: #21526f;
+  cursor: pointer;
+}
+
 #landing{
   background: url(earth.jpeg) center center;
   height: 400px;
@@ -33,22 +49,6 @@ body{
 #query{
   padding: 10px;
   margin: 10px 0;
-}
-
-#search-btn{
-  padding: 8px;
-  width: 184px;
-  border: 3px solid #21526f;
-  margin: 10px 0;
-  color: #fff;
-  background: #21526f;
-  transition: all .25s linear;
-}
-
-#search-btn:hover{
-  background: #fff;
-  color: #21526f;
-  cursor: pointer;
 }
 
 #msg{
@@ -83,7 +83,7 @@ body{
 .single-result .title{
   color: #8dbbde;
   text-align: center;
-  padding: 15px;
+  padding: 8px 15px 3px 15px;
   position: absolute;
   bottom: 14px;
   left: 0;
@@ -91,6 +91,23 @@ body{
   background: rgba(0,0,0, .75);
   margin: 0 10px;
   font-weight: normal;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#pagination{
+  margin-bottom: 100px;
+  text-align: center;
+}
+
+#pagination button{
+  font-size: 25px;
+  width: 50px;
+  margin: 20px 5px;
+  display: none;
 }
 
 /* Media Queries*/
