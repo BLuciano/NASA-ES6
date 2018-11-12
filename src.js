@@ -23,11 +23,13 @@ btn.addEventListener('click', (e) => {
 nextBtn.addEventListener('click', (e) =>{
   btn.innerText = "searching...";
   dataWrap.innerHTML = "";
+  window.scrollTo(0,0);
   getData(nextUrl);
 });
 prevBtn.addEventListener('click', (e) =>{
   btn.innerText = "searching...";
   dataWrap.innerHTML = "";
+  window.scrollTo(0,0);
   getData(prevUrl);
 });
 
