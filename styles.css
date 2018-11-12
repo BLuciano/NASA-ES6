@@ -1,0 +1,114 @@
+body{
+  background: #ddd;
+}
+
+#landing{
+  background: url(earth.jpeg) center center;
+  height: 400px;
+  background-size: cover;
+  position: relative;
+}
+
+#landing h1{
+  position: absolute;
+  top: 100px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 4em;
+  color: #fff;
+  text-shadow: 3px 3px 2px #111;
+}
+
+#selection{
+  margin-top: 30px;
+  text-align: center;
+  padding: 0 25px;
+}
+
+#selection h3{
+  color: #164b61;
+}
+
+#query{
+  padding: 10px;
+  margin: 10px 0;
+}
+
+#search-btn{
+  padding: 8px;
+  width: 184px;
+  border: 3px solid #21526f;
+  margin: 10px 0;
+  color: #fff;
+  background: #21526f;
+  transition: all .25s linear;
+}
+
+#search-btn:hover{
+  background: #fff;
+  color: #21526f;
+  cursor: pointer;
+}
+
+#msg{
+  margin: 50px 15px;
+  text-align: center;
+}
+
+#results{
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.single-result{
+  width: 23%;
+  margin: 15px 1%;
+  position: relative;
+  transition: all .25s linear;
+}
+
+.single-result img{
+  border-style: none;
+  width: 100%;
+  border: 10px solid #fff;
+  box-shadow: 0px 0px 15px #333;
+  box-sizing: border-box;
+  height: 300px;
+  object-fit: cover;
+}
+
+.single-result .title{
+  color: #8dbbde;
+  text-align: center;
+  padding: 15px;
+  position: absolute;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0, .75);
+  margin: 0 10px;
+  font-weight: normal;
+}
+
+/* Media Queries*/
+@media screen and (max-width:1250px){
+  .single-result{
+    width: 31%;
+  }
+}
+
+@media screen and (max-width:980px){
+  .single-result{
+    width: 48%;
+  }
+}
+
+@media screen and (max-width:600px){
+  .single-result{
+    width: 95%;
+    margin: 15px 2.5%;
+  }
+}
