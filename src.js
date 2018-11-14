@@ -4,10 +4,15 @@ let ApiUrl = "https://images-api.nasa.gov/search?q=";
 let btn = document.getElementById('search-btn');
 let messages = document.getElementById("msg");
 let dataWrap = document.getElementById('results');
+let overlay = document.getElementById("overlay");
 let nextBtn = document.getElementsByClassName('next')[0];
 let prevBtn = document.getElementsByClassName('prev')[0];
 let nextUrl = "";
 let prevUrl = "";
+
+overlay.addEventListener('click', (e) =>{
+  overlay.style.display = "none"
+})
 
 //Calls getData on button click with user search or default value
 btn.addEventListener('click', (e) => {
@@ -61,24 +66,37 @@ function getData(url){
 function displayData(JsonData){
   let data = JsonData.collection.items;
   let links = JsonData.collection.links;
-  let results = "";
 
   data.forEach(x =>{
     //Only displays the results with image type
     if(x.data[0].media_type === "image"){
       let {title, description : desc} = x.data[0];
       let src = x.links[0].href;
-      results += "<article class='single-result'>";
-      results += `<img src="${src}">`;
-      results += `<h3 class='title'>${title}</h3></article>`;
-      //results += `<p class='desc'>${desc}</p></article>`;
+      let article = document.createElement("article");
+      let articleAtt = document.createAttribute("class");
+      articleAtt.value = "single-result";
+      article.setAttributeNode(articleAtt);
+
+      article.innerHTML =
+        `<img src="${src}">` +
+        `<h3 class="title">${title}</h3></article>`;
+
+      article.addEventListener("click", () =>{
+        overlay.innerHTML =
+          `<img src="${src}">` +
+          `<h3 class="title">${title}</h3></article>` +
+          `<p class="desc">${desc}</p>`;
+
+        overlay.style.display = 'block';
+      });
+
+      dataWrap.append(article);
     }
   });
 
-  if(results === ""){
+  if(dataWrap.innerHTML === ""){
     messages.innerText = "Sorry! The are no results for this search.";
   } else {
-    dataWrap.innerHTML = results;
     displayNavigation(links);
   }
   btn.innerText = "search";

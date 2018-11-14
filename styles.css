@@ -70,6 +70,11 @@ button:hover{
   transition: all .25s linear;
 }
 
+.single-result:hover{
+  cursor: pointer;
+  transform: scale(.90);
+}
+
 .single-result img{
   border-style: none;
   width: 100%;
@@ -110,10 +115,33 @@ button:hover{
   display: none;
 }
 
+#overlay{
+  width: 100%;
+  height: 100%;
+  padding-top: 50px;
+  overflow-y: scroll;
+  color: #fff;
+  position: fixed;
+  display: none;
+  text-align: center;
+  background: rgba(0,0,0, .85);
+  top: 0;
+}
+
+#overlay img{
+  max-width: 75%;
+}
+
+#overlay p{
+  padding: 25px;
+  margin-bottom: 150px;
+  line-height: 1.5em;
+}
+
 /* Media Queries*/
 @media screen and (max-width:1250px){
   .single-result{
-    width: 31%;
+    width: 31.333333%;
   }
 }
 
